@@ -1,7 +1,1 @@
-Dette er en test
-<<<<<<< HEAD
-
-lul
-=======
-jamie test
->>>>>>> efac48273f76ac9ae5b641d0ef1463fb90b50dfd
+Dette er en test 2
