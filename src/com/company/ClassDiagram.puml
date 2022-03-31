@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/class-diagram
+class Tournament
+class Match
+class Result
+class textUI
+class fileIO
+class Team
+
+
+Main *-- Tournament
+Tournament *-- Match
+Match *-- Team
+Tournament *-- Result
+Tournament *-- textUI
+Tournament *-- fileIO
+
+Main : public static void main(String[] args)
+
+Tournament : startMatch();
+Tournament : endMatch();
+Tournament : currentMatch();
+Tournament : getMatchHistory();
+
+Match : int startTime
+Match : int endTime
+Match : getMatchTime();
+
+Result : addResultToTeam();
+
+textUI : registerTeam();
+textUI : showTeams();
+textUI : showResults();
+textUI : getTeamPlacement();
+textUI : showAllMatches();
+textUI : showNextMatch();
+
+fileIO : writeTeamData();
+fileIO : readTeamData();
+fileIO : saveData();
+
+Team : String teamName
+Team : int teamSize
+Team : String[] teamPlayers
+Team : teamScore
+Team : teamPosition
+Team : @ toString();
+Team : getTeamName();
+Team : getTeamSize();
+@enduml
