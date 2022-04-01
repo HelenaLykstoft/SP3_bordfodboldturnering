@@ -3,8 +3,30 @@ package com.company;
 public class Match {
     int startTime;
     int endTime;
-    public void getMatchTime()
-    {
+    Team team1;
+    Team team2;
+
+    // constructor
+    public Match(int startTime, int endTime, Team team1, Team team2){
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.team1 = team1;
+        this.team2 = team2;
     }
 
+    public String getMatchTime(){
+        return  "The match takes place at this: " + startTime + "-" + endTime;
+    }
+
+    public Team getWinningTeam(TextUI textUI){
+        String str = textUI.getUserInput("What team won the match press 1 for team 1 and 2 for team 2.");
+        if (!str.equals("1") && !str.equals("2")) {
+            textUI.writeToUser("you can only write 1 or 2.");
+            getWinningTeam(textUI);
+        }
+        if(str.equals("1")){
+            return team1;
+        }
+            return team2;
+    }
 }
