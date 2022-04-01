@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class textUI {
+public class TextUI {
 
 
     public ArrayList<String> registerTeam(String message){

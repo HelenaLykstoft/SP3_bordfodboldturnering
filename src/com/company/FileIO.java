@@ -1,6 +1,6 @@
 package com.company;
 
-public class fileIO {
+public class FileIO {
     public void writeTeamData(){
 
     }
