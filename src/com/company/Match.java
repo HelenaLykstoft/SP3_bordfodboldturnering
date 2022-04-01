@@ -1,10 +1,10 @@
 package com.company;
 
 public class Match {
-    int startTime;
-    int endTime;
-    Team team1;
-    Team team2;
+    private int startTime;
+    private int endTime;
+    private Team team1;
+    private Team team2;
 
     // constructor
     public Match(int startTime, int endTime, Team team1, Team team2){
