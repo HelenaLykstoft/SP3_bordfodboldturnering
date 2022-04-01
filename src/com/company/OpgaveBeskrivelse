@@ -37,17 +37,17 @@ Når en kamp er spillet registrerer turneringslederen resultatet i systemet. Vin
 samme antal point, er det målscoren der afgør hvem der placeres højest. Et holds målscore
 defineres som antal mål de scorede minus antal mål der gik ind.
 
-Systemet skal kunne vise:
-- alle tilmeldte hold
-- holdenes placering i turneringen
-- et kampprogram hvor alle planlagte kampe listes.
-	-  Udfor kampe der ER spillet, vises resultatet
-- hvornår næste kamp spilles.
+TODO Systemet skal kunne vise:
+    - alle tilmeldte hold
+    - holdenes placering i turneringen
+    - et kampprogram hvor alle planlagte kampe listes.
+    -  Udfor kampe der ER spillet, vises resultatet
+    - hvornår næste kamp spilles.
 
-Tekniske krav:
-- Systemet skal udvikles som en Java applikation
-- Tekstbaseret brugerinterface er tilstrækkeligt
-- Al data om hold og kampe bliver skrevet til fil hver gang programmet afsluttes, og loadet
-ind igen når programmet starter. Senere skal data kunne gemmes og loades fra en database
+TODO Tekniske krav:
+    - Systemet skal udvikles som en Java applikation
+    - Tekstbaseret brugerinterface er tilstrækkeligt
+    - Al data om hold og kampe bliver skrevet til fil hver gang programmet afsluttes, og loadet
+        ind igen når programmet starter. Senere skal data kunne gemmes og loades fra en database
 
 * I en knockout turnering går man kun videre hvis man vinder sin kamp.

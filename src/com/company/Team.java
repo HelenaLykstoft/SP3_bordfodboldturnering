@@ -6,8 +6,11 @@ public class Team {
     String[] teamPlayers;
     int teamScore;
     int teamPosition;
-    @ toString(){
 
+    @Override
+    public String toString(){
+
+        return null;
     }
     public void getTeamName(){
 
