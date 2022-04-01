@@ -1,6 +1,14 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Tournament {
+
+private FileIO fileIO = new FileIO();
+
+
+
+
     public void startMatch(){
 
     }

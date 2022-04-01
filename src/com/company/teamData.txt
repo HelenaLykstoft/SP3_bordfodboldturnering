@@ -1,0 +1,4 @@
+teamName, playerNames, score, position
+Triple Fire Cyclops, Kenneth, Kenny, Penny, 0, 0
+Lazy Court Vampires, Kartsen, Peter, Poul, 0, 0
+Sexy Slime Troopers, Henrik, Herman, Didrik, 0, 0
