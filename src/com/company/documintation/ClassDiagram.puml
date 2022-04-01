@@ -12,8 +12,8 @@ Main *-- Tournament
 Tournament *-- Match
 Match *-- Team
 Tournament *-- Result
-Tournament *-- textUI
-Tournament *-- fileIO
+Tournament *-- TextUI
+Tournament *-- FileIO
 Team *-- Player
 
 Main : public static void main(String[] args)
@@ -29,16 +29,16 @@ Match : getMatchTime();
 
 Result : addResultToTeam();
 
-textUI : registerTeam();
-textUI : showTeams();
-textUI : showResults();
-textUI : getTeamPlacement();
-textUI : showAllMatches();
-textUI : showNextMatch();
+TextUI : registerTeam();
+TextUI : showTeams();
+TextUI : showResults();
+TextUI : getTeamPlacement();
+TextUI : showAllMatches();
+TextUI : showNextMatch();
 
-fileIO : writeTeamData();
-fileIO : readTeamData();
-fileIO : saveData();
+FileIO : writeTeamData();
+FileIO : readTeamData();
+FileIO : saveData();
 
 Team : String teamName
 Team : int teamSize
