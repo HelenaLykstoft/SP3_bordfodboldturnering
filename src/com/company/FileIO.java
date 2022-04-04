@@ -16,7 +16,7 @@ public class FileIO {
             Scanner scan = new Scanner(file);
             int i = 0;
 
-            String firstline = scan.nextLine();
+            String header = scan.nextLine();
 
             while (scan.hasNextLine()) {
                 teamData.add(scan.nextLine()); //team name + player + score + position.
@@ -29,7 +29,7 @@ public class FileIO {
 
     }
     public ArrayList<String> writeTeamData() {
-        return readTeamData();
+        return null;
 
     }
 
