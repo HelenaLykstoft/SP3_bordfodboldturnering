@@ -32,4 +32,8 @@ public class Team {
     public int getTeamPosition(){
         return this.teamPosition;
     }
+
+    public void addToTeamScore() {
+       this.teamScore += 2;
+    }
 }
