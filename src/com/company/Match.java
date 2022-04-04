@@ -14,11 +14,11 @@ public class Match {
         this.team2 = team2;
     }
 
-    public String getMatchTime(){
+    public String getMatchTime(){ // give a string tells the start and end time of this match
         return  "The match takes place at this: " + startTime + "-" + endTime;
     }
 
-    public Team getWinningTeam(TextUI textUI){
+    public Team getWinningTeam(TextUI textUI){ // register the winning team
         String str = textUI.getUserInput("What team won the match press 1 for team 1 and 2 for team 2.");
         if (!str.equals("1") && !str.equals("2")) {
             textUI.writeToUser("you can only write 1 or 2.");
