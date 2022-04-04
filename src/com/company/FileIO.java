@@ -46,5 +46,26 @@ public class FileIO {
             e.printStackTrace();
         }
     }
+    public ArrayList<Match> loadData() {
+    File file = new File("src/matchdata.txt");
+    ArrayList<Match> matchResult = new ArrayList<>();
+    try {
+        Scanner scan = new Scanner(file);
+        int i = 0;
+        String header = scan.nextLine();
+
+        while (scan.hasNextLine())
+        {
+            String[] matchData = scan.nextLine().split("tmp ");
+            Match match = new Match();
+            match.setTeam1(matchData[0]);
+            match.setTeam2(matchData[0]);
+        }
+    } catch (FileNotFoundException e) {
+        matchResult = null;
+    }
+    return matchResult;
 }
+}
+
 
