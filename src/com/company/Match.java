@@ -6,14 +6,6 @@ public class Match {
     private Team team1;
     private Team team2;
 
-    // constructor
-    public Match(int startTime, int endTime, Team team1, Team team2){
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.team1 = team1;
-        this.team2 = team2;
-    }
-
     public String getMatchTime(){
         return  "The match takes place at this: " + startTime + "-" + endTime;
     }
@@ -28,5 +20,17 @@ public class Match {
             return team1;
         }
             return team2;
+    }
+
+    public void setTeam1(Team team1) {
+        this.team1 = team1;
+    }
+
+    public void setTeam2(Team team2) {
+        this.team2 = team2;
+    }
+    public void setTime(int startTime, int endTime){
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 }
