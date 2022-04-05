@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileIO {
-    ArrayList<String> readTeamData() {
-        File file = new File("src/teamData.txt");
+    ArrayList<Team> readTeamData() {
+        File file = new File("src/com/company/teamData.txt");
         ArrayList<String> teamData = new ArrayList<>();
 
         try {
@@ -19,33 +19,46 @@ public class FileIO {
             String header = scan.nextLine();
 
             while (scan.hasNextLine()) {
-                teamData.add(scan.nextLine()); //team name + player + score + position.
+                teamData.add(scan.nextLine()); //team name+ teamSize + player + score + position.
                 i++; //
             }
         } catch (FileNotFoundException e) {
             teamData = null;
         }
-        return teamData;
+        ArrayList<Team> currentTeams = new ArrayList<>();
+        for (int i = 0; i < teamData.size(); i++)
+        {
+            String[] currentTeamData = teamData.get(i).split(", ");
+            int currentTeamSize = Integer.parseInt(currentTeamData[1]);
+
+            ArrayList<String> currentPlayers = new ArrayList<>();
+
+
+            for(int j = 2; j < currentTeamSize+2; j++)
+            {
+                currentPlayers.add(currentTeamData[j]);
+            }
+            Team tmpTeam = new Team(currentTeamData[0],currentPlayers,Integer.parseInt(currentTeamData[currentTeamSize+2]),Integer.parseInt(currentTeamData[currentTeamSize+3]));
+            currentTeams.add(tmpTeam);
+        }
+        return currentTeams;
 
     }
-    public ArrayList<String> writeTeamData() {
-        return null;
 
-    }
-
-    public void saveData(Team team) {
-        String teamData = "teamName, playerNames, score, position\n";
-        for (String player : team.teamPlayers) {
-            teamData = "" + team.getTeamName() + ", " + team.getTeamPlayers() + ", " + team.getTeamPosition() + "\n";
+    public void writeTeamData(ArrayList<Team> teams) {
+        String teamData = "teamName, teamSize, playerNames, score, position\n";
+        for (int i=0;i<teams.size();i++) {
+            teamData+= "" + teams.get(i).getTeamName() + ", " + teams.get(i).teamPlayers.size() + ", " + teams.get(i).getTeamPlayersasString() + teams.get(i).getTeamScore() +", "+ teams.get(i).getTeamPosition() + "\n";
         }
         try {
-            FileWriter output = new FileWriter("src/teamData.txt");
+            FileWriter output = new FileWriter("src/com/company/teamData.txt");
             output.write(teamData);
             output.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public ArrayList<Match> loadData() {
     File file = new File("src/matchdata.txt");
     ArrayList<Match> matchResult = new ArrayList<>();
