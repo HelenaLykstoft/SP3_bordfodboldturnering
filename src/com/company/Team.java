@@ -26,6 +26,15 @@ public class Team {
     public ArrayList<String> getTeamPlayers(){
         return this.teamPlayers;
     }
+
+    public String getTeamPlayersasString(){
+        String temp="";
+        for(int i=0;i<teamPlayers.size();i++){
+            temp += teamPlayers.get(i) + ", ";
+        }
+        return temp;
+    }
+
     public int getTeamScore(){
         return this.teamScore;
     }

@@ -14,6 +14,7 @@ Result result = new Result();
     public Tournament(){
         teams = new ArrayList<>();
         matches = new ArrayList<>();
+        teams = fileIO.readTeamData();
     }
 
 
@@ -42,6 +43,7 @@ Result result = new Result();
                     Team newTeam = createTeam(data);
                     teams.add(newTeam);
                     System.out.println(teams);
+                    fileIO.writeTeamData(teams);
                     break;
                 case 3:
                     for (int j =1;j<5;j++) {

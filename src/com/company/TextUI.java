@@ -15,7 +15,7 @@ public class TextUI {
         input = scan.nextLine();
         data.add(input);
 
-        while(data.size()<5){ // 5 because theres teamname and up to 5 players
+        while(data.size()<=5){ // 5 because theres teamname and up to 5 players
             System.out.println("Write your team members names one at a time here or press q to quit: ");
             input=scan.nextLine(); // Gets the next line in terminal
             if(input.equalsIgnoreCase("Q")){
