@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class TextUI {
 
 
-    public ArrayList<String> registerTeam(String message){
+    public ArrayList<String> registerTeam(){
         // Creating new ArrayList to create one team at a time
         ArrayList<String> data = new ArrayList<>();
         String input; // The input we write
@@ -16,7 +16,7 @@ public class TextUI {
         data.add(input);
 
         while(data.size()<5){ // 5 because theres teamname and up to 5 players
-            System.out.println("Write your team members names here or press q to quit: ");
+            System.out.println("Write your team members names one at a time here or press q to quit: ");
             input=scan.nextLine(); // Gets the next line in terminal
             if(input.equalsIgnoreCase("Q")){
                 break;

@@ -58,8 +58,8 @@ public class FileIO {
         {
             String[] matchData = scan.nextLine().split("tmp ");
             Match match = new Match();
-            match.setTeam1(matchData[0]);
-            match.setTeam2(matchData[0]);
+            //match.setTeam1(matchData[0]);
+            //match.setTeam2(matchData[0]);
         }
     } catch (FileNotFoundException e) {
         matchResult = null;

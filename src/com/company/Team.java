@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 
 public class Team {
-    String teamName;
+    private String teamName;
     ArrayList<String> teamPlayers;
     int teamScore;
     int teamPosition;
@@ -18,7 +18,7 @@ public class Team {
     @Override
     public String toString(){
 
-        return null;
+        return this.teamName;
     }
     public String getTeamName(){
         return this.teamName;
