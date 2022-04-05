@@ -5,6 +5,7 @@ public class Match {
     private int endTime;
     private Team team1;
     private Team team2;
+    private int matchNumber;
 
     public String getMatchTime(){
         return  "The match takes place at this: " + startTime + "-" + endTime;
@@ -22,8 +23,23 @@ public class Match {
             return team2;
     }
 
+    public void setMatchNumber(int i){
+        this.matchNumber = i;
+    }
+
+    public int getMatchNumber(){
+        return this.matchNumber;
+    }
+
+
     public void setTeam1(Team team1) {
         this.team1 = team1;
+    }
+    public Team getTeam1(){
+        return this.team1;
+    }
+    public Team getTeam2(){
+        return this.team2;
     }
 
     public void setTeam2(Team team2) {
@@ -33,4 +49,9 @@ public class Match {
         this.startTime = startTime;
         this.endTime = endTime;
     }
+    @Override
+    public String toString(){
+        return team1.toString()+team2.toString();
+    }
+
 }

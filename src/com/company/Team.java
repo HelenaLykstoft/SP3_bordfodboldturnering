@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 
 public class Team {
-    String teamName;
+    private String teamName;
     ArrayList<String> teamPlayers;
     int teamScore;
     int teamPosition;

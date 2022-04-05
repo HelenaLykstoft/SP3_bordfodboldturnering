@@ -9,53 +9,79 @@ private com.company.TextUI textUI = new com.company.TextUI();
 ArrayList<Team> teams;
 ArrayList<Match> matches;
 String time;
+Result result = new Result();
 
     public Tournament(){
         teams = new ArrayList<>();
+        matches = new ArrayList<>();
     }
 
 
-    public void tournamentMenu(){
+    public void tournamentMenu() {
         textUI.writeToUser("Hello! Welcome! This is the startmenu.");
-        int i = 0;
-        i=Integer.parseInt(textUI.getUserInput("Here u will see the menu: " +
-                "\nPress 1 to register tournament time. " +
-                "\nPress 2 to register team. " +
-                "\nPress 3 to register the lineup for the first 4 games. " +
-                "\nPress 4 to register the semifinals. " +
-                "\nPress 5 to register the final match. " +
-                "\nPress 6 to register wins."));
-        switch (i){
-            case 1:
-                String start = textUI.getUserInput("When does the tournament start?");
-                String end = textUI.getUserInput("When does the tournament end?");
-                setTime(start+" - " + end);
-                System.out.println(time);
-                break;
-            case 2:
-                ArrayList<String> data = new ArrayList<>();
-                data = textUI.registerTeam();
-                Team newTeam = createTeam(data);
-                teams.add(newTeam);
-                System.out.println(teams);
-                break;
-            case 3:
-                textUI.getUserInput("Match number 1 is played by: ");
-                Match matchOne = new Match();
-                textUI.getUserInput("Match number 2 is played by: ");
-                textUI.getUserInput("Match number 3 is played by: ");
-                textUI.getUserInput("Match number 4 is played by: ");
-                break;
-            case 4:
-                textUI.getUserInput("Which teams should play semifinals against eachother? Type (teamname),(teamname). ");
-                break;
-            case 5:
-                textUI.getUserInput("Which two teams should play in the finals? Seperat them with a comma. ");
-                break;
-            case 6:
-                textUI.getUserInput("Which match do you want to add result to? ");
-                // 1,2,3,4 ( første kampe ) 5,6 ( semifinale ), 7 (finale)
-                textUI.getUserInput("Who won? xx or xx?");
+        int i= Integer.MAX_VALUE;
+        String[] split;
+        while (i != 0) {
+            i = Integer.parseInt(textUI.getUserInput("Here u will see the menu: " +
+                    "\nPress 1 to register tournament time. " +
+                    "\nPress 2 to register team. " +
+                    "\nPress 3 to register the lineup for the first 4 games. " +
+                    "\nPress 4 to register the semifinals. " +
+                    "\nPress 5 to register the final match. " +
+                    "\nPress 6 to register wins."));
+            switch (i) {
+                case 1:
+                    String start = textUI.getUserInput("When does the tournament start?");
+                    String end = textUI.getUserInput("When does the tournament end?");
+                    setTime(start + " - " + end);
+                    System.out.println(time);
+                    break;
+                case 2:
+                    ArrayList<String> data = new ArrayList<>();
+                    data = textUI.registerTeam();
+                    Team newTeam = createTeam(data);
+                    teams.add(newTeam);
+                    System.out.println(teams);
+                    break;
+                case 3:
+                    for (int j =1;j<5;j++) {
+                        split = textUI.getUserInput("(write teamnames with one space between)" +
+                                "\nMatch number " + j + " is played by: ").split(" ");
+                        Match matchTemp = new Match();
+                        matchTemp.setMatchNumber(j);
+                        matchTemp.setTeam1(searchTeam(split[0]));
+                        matchTemp.setTeam2(searchTeam(split[1]));
+                        matches.add(matchTemp);
+                        System.out.println(matches);
+                    }
+                    break;
+                case 4:
+                    for (int j =5;j<7;j++) {
+                        split = textUI.getUserInput("Which teams should play semifinals against eachother?" +
+                                "\nMatch number " + j + " is played by: ").split(" ");
+                        Match matchTemp = new Match();
+                        matchTemp.setMatchNumber(j);
+                        matchTemp.setTeam1(searchTeam(split[0]));
+                        matchTemp.setTeam2(searchTeam(split[1]));
+                        matches.add(matchTemp);
+                        System.out.println(matches);
+                    }
+                    break;
+                case 5:
+                    split = textUI.getUserInput("Which two teams should play in the final together?").split(" ");
+                    Match matchTemp = new Match();
+                    matchTemp.setMatchNumber(7); // 7 because it is the final match
+                    matchTemp.setTeam1(searchTeam(split[0]));
+                    matchTemp.setTeam2(searchTeam(split[1]));
+                    matches.add(matchTemp);
+                    System.out.println(matches);
+                    break;
+                case 6:
+                    int k = Integer.parseInt(textUI.getUserInput("1,2,3,4 ( first matches ) 5,6 ( semifinals ), 7 (final match)" +
+                            "\nWhich match do you want to add result to? "));
+                    result.addResultToTeam(matches.get(k-1),textUI);
+                    System.out.println(matches.get(k-1).getTeam1().teamScore + " " + matches.get(k-1).getTeam2().teamScore);
+            }
         }
     }
 
@@ -96,6 +122,15 @@ String time;
         System.out.println("Match two is played by: ");
         System.out.println("Match three is played by: ");
         System.out.println("Match four is played by: ");
+    }
+
+    public Team searchTeam(String searchName){
+        for (int i=0; i<teams.size();i++){
+            if (teams.get(i).getTeamName().equals(searchName)){
+                return teams.get(i);
+            }
+        }
+        return null;
     }
 
     public void startMatch()
