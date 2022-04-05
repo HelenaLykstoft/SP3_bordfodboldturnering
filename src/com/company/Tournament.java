@@ -6,32 +6,45 @@ public class Tournament {
 
 private FileIO fileIO = new FileIO();
 private com.company.TextUI textUI = new com.company.TextUI();
-ArrayList<Team> teams = new ArrayList<>();
-private Match match;
+ArrayList<Team> teams;
+ArrayList<Match> matches;
+String time;
+
+    public Tournament(){
+        teams = new ArrayList<>();
+    }
 
 
     public void tournamentMenu(){
         textUI.writeToUser("Hello! Welcome! This is the startmenu.");
-        int i=0;
-        textUI.getUserInput("Here u will see the menu: " +
+        int i = 0;
+        i=Integer.parseInt(textUI.getUserInput("Here u will see the menu: " +
                 "\nPress 1 to register tournament time. " +
                 "\nPress 2 to register team. " +
                 "\nPress 3 to register the lineup for the first 4 games. " +
                 "\nPress 4 to register the semifinals. " +
                 "\nPress 5 to register the final match. " +
-                "\nPress 6 to register wins.");
+                "\nPress 6 to register wins."));
         switch (i){
             case 1:
-                registerTime();
+                String start = textUI.getUserInput("When does the tournament start?");
+                String end = textUI.getUserInput("When does the tournament end?");
+                setTime(start+" - " + end);
+                System.out.println(time);
                 break;
             case 2:
-                ArrayList<String>  data= new ArrayList<>();
-                data = textUI.registerTeam("Create your team here. Type your teamname and all names of the members: ");
+                ArrayList<String> data = new ArrayList<>();
+                data = textUI.registerTeam();
                 Team newTeam = createTeam(data);
                 teams.add(newTeam);
+                System.out.println(teams);
                 break;
             case 3:
-                textUI.getUserInput("Which teams should play against eachother? Type (teamname),(teamname). (teamname),(teamname).");
+                textUI.getUserInput("Match number 1 is played by: ");
+                Match matchOne = new Match();
+                textUI.getUserInput("Match number 2 is played by: ");
+                textUI.getUserInput("Match number 3 is played by: ");
+                textUI.getUserInput("Match number 4 is played by: ");
                 break;
             case 4:
                 textUI.getUserInput("Which teams should play semifinals against eachother? Type (teamname),(teamname). ");
@@ -45,7 +58,8 @@ private Match match;
                 textUI.getUserInput("Who won? xx or xx?");
         }
     }
-    public Tournament(FileIO fileIO, TextUI textUI, ArrayList<Team> teams, Team team) {
+
+    /*public Tournament(FileIO fileIO, TextUI textUI, ArrayList<Team> teams, Team team) {
         this.fileIO = fileIO;
         this.textUI = textUI;
         this.teams = teams;
@@ -64,7 +78,7 @@ private Match match;
         }
         this.createTeam(teamPlayers);
 
-    }
+    }*/
 
     private Team createTeam(ArrayList<String> teamPlayers){
         String teamName = teamPlayers.get(0);
@@ -73,8 +87,16 @@ private Match match;
         return team;
     }
 
+    public void setTime(String time) {
+        this.time = time;
+    }
 
-
+    public void createMatches(){
+        textUI.getUserInput("Match one is played by: ");
+        System.out.println("Match two is played by: ");
+        System.out.println("Match three is played by: ");
+        System.out.println("Match four is played by: ");
+    }
 
     public void startMatch()
     {

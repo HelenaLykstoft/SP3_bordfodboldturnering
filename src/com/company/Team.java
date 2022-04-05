@@ -18,7 +18,7 @@ public class Team {
     @Override
     public String toString(){
 
-        return null;
+        return this.teamName;
     }
     public String getTeamName(){
         return this.teamName;
