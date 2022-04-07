@@ -60,7 +60,7 @@ public class FileIO {
     }
 
     public ArrayList<Match> loadData() {
-    File file = new File("src/matchdata.txt");
+    File file = new File("src/com/company/matchdata.txt");
     ArrayList<Match> matchResult = new ArrayList<>();
     try {
         Scanner scan = new Scanner(file);

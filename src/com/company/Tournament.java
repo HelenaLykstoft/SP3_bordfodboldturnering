@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Tournament {
@@ -22,15 +23,19 @@ Result result = new Result();
         textUI.writeToUser("Hello! Welcome! This is the startmenu.");
         int i= Integer.MAX_VALUE;
         String[] split;
-        while (i != 0) {
-            i = Integer.parseInt(textUI.getUserInput("Here u will see the menu: " +
-                    "\nPress 1 to register tournament time. " +
-                    "\nPress 2 to register team. " +
-                    "\nPress 3 to register the lineup for the first 4 games. " +
-                    "\nPress 4 to register the semifinals. " +
-                    "\nPress 5 to register the final match. " +
-                    "\nPress 6 to register wins."));
+        while (i != -1) {
+            i = Integer.parseInt(textUI.getUserInput("Press 0 to open menu: "));
             switch (i) {
+                case 0:
+                    textUI.writeToUser("Here u will see the menu: " +
+                            "\nPress 1 to register tournament time. " +
+                            "\nPress 2 to register team. " +
+                            "\nPress 3 to register the lineup for the first 4 games. " +
+                            "\nPress 4 to register the semifinals. " +
+                            "\nPress 5 to register the final match. " +
+                            "\nPress 6 to register wins." +
+                            "\nPress 7 to show team data.");
+                    break;
                 case 1:
                     String start = textUI.getUserInput("When does the tournament start?");
                     String end = textUI.getUserInput("When does the tournament end?");
@@ -83,6 +88,15 @@ Result result = new Result();
                             "\nWhich match do you want to add result to? "));
                     result.addResultToTeam(matches.get(k-1),textUI);
                     System.out.println(matches.get(k-1).getTeam1().teamScore + " " + matches.get(k-1).getTeam2().teamScore);
+                    break;
+                case 7:
+                    textUI.writeToUser("This is the teams who are in the tournament: " + teams);
+                    break;
+                case 8:
+
+                    break;
+                case 9:
+                    break;
             }
         }
     }
