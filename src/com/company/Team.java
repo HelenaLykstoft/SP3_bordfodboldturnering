@@ -18,7 +18,7 @@ public class Team {
     @Override
     public String toString(){
 
-        return this.teamName;
+        return("\nTeams:"+ this.teamName+" "+"Score: "+ this.teamScore+" "+"Points total: "+this.teamPosition);
     }
     public String getTeamName(){
         return this.teamName;

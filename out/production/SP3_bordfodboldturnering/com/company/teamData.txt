@@ -1,3 +1,5 @@
 teamName, teamSize, playerNames, score, position
 hej med dig, 5, hej, med, dig, Isak, lol, 0, 0
 God speed, 2, Isak, Jamie, 0, 0
+no speed, 3, helena, helene, hell, 0, 0
+blublablu, 3, ijafims, isjfism, isjfisjf, 0, 0
