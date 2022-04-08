@@ -1,5 +1,5 @@
-teamName, teamSize, playerNames, score, position
-hej med dig, 5, hej, med, dig, Isak, lol, 0, 0
-God speed, 2, Isak, Jamie, 0, 0
-no speed, 3, helena, helene, hell, 0, 0
-blublablu, 3, ijafims, isjfism, isjfisjf, 0, 0
+teamName, teamSize, playerNames, score, position, goalPoints, seed
+hej med dig, 5, hej, med, dig, Isak, lol, 2, 0, 10, 0
+God speed, 2, Isak, Jamie, 2, 0, 20, 1
+no speed, 3, helena, helene, hell, 0, 0, 30, 2
+blublablu, 3, ijafims, isjfism, isjfisjf, 4, 0, 5, 3
