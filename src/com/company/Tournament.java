@@ -120,7 +120,8 @@ private float matchTime;
                     break;
                 case 10:
                     //writeDB();
-                    readDB();
+                    //readDB();
+                    System.out.println(teams.get(0).teamPlayers);
                     break;
             }
         }

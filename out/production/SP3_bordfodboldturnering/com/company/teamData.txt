@@ -1,6 +1,7 @@
 teamName, teamSize, playerNames, score, position, goalPoints, seed
-hej med dig, 5, hej, med, dig, Isak, lol, 2, 0, 10, 0
-God speed, 2, Isak, Jamie, 2, 0, 20, 1
-no speed, 3, helena, helene, hell, 0, 0, 30, 2
-blublablu, 3, ijafims, isjfism, isjfisjf, 4, 0, 5, 3
-team seje, 3, jkfsjf, ijfsis, ijadi, 0, 0, 0, 4
+hej med dig, 3, hej, med, dig, 2, 0, 10, 0
+God speed, 2, com.company.Player@5c29bfd, com.company.Player@7aec35a, 2, 0, 20, 1
+no speed, 3, com.company.Player@67424e82, com.company.Player@42110406, com.company.Player@531d72ca, 0, 0, 30, 2
+blublablu, 3, com.company.Player@22d8cfe0, com.company.Player@579bb367, com.company.Player@1de0aca6, 4, 0, 5, 3
+team seje, 3, com.company.Player@255316f2, com.company.Player@41906a77, com.company.Player@4b9af9a9, 0, 0, 0, 4
+please work, 5, com.company.Player@5387f9e0, com.company.Player@6e5e91e4, com.company.Player@2cdf8d8a, com.company.Player@30946e09, com.company.Player@5cb0d902, 0, 0, 0, 5

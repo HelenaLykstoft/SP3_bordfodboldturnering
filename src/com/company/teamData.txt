@@ -1,5 +1,5 @@
 teamName, teamSize, playerNames, score, position, goalPoints, seed
-hej med dig, 5, com.company.Player@728938a9, com.company.Player@21b8d17c, com.company.Player@6433a2, com.company.Player@5910e440, com.company.Player@6267c3bb, 2, 0, 10, 0
+hej med dig, 3, hej, med, dig, 2, 0, 10, 0
 God speed, 2, com.company.Player@5c29bfd, com.company.Player@7aec35a, 2, 0, 20, 1
 no speed, 3, com.company.Player@67424e82, com.company.Player@42110406, com.company.Player@531d72ca, 0, 0, 30, 2
 blublablu, 3, com.company.Player@22d8cfe0, com.company.Player@579bb367, com.company.Player@1de0aca6, 4, 0, 5, 3
