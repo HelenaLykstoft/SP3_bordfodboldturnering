@@ -115,6 +115,9 @@ private float matchTime;
                 case 9:
                     textUI.writeToUser("These are the current matches registered:\n" + matches);
                     break;
+                case 10:
+                    writeDB();
+                    break;
             }
         }
     }
@@ -180,5 +183,9 @@ private float matchTime;
     }
     public void getMatchHistory(){
 
+    }
+    public void writeDB(){
+        DatabaseIO databaseIO = new DatabaseIO();
+        databaseIO.writeTeamData(teams);
     }
 }

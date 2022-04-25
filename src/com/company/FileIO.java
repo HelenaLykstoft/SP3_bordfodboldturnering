@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileIO {
-    ArrayList<Team> readTeamData() {
+public class FileIO implements IO{
+    public ArrayList<Team> readTeamData() {
         File file = new File("src/com/company/teamData.txt");
         ArrayList<String> teamData = new ArrayList<>();
 
