@@ -12,7 +12,8 @@ public class DatabaseIO {
 
         String JdbcUrl = "jdbc:mysql://127.0.0.1:3306/sp3+?" + "autoReconnect=true&useSSL=false";
         String username = "root";
-        String password = "Lampen04aug";
+        //String password = "Lampen04aug"; // helena password
+        String password = "Mysql1238Code18";
 
         try {
             connection = DriverManager.getConnection(JdbcUrl, username, password);
