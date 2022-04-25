@@ -66,7 +66,24 @@ public class DatabaseIO implements IO {
     @Override
     public ArrayList<Team> readTeamData()
     {
-        return null;
+        createConnection();
+        String getTeamName = "SELECT * FROM team";
+        try {
+            PreparedStatement query2 = connection.prepareStatement(getTeamName);
+            var query2Result = query2.executeQuery();
+
+            while (query2Result.next()) {
+                System.out.println(query2Result.getString(2));
+               // Team tmpteam = new Team(query2Result.getString(2));
+            }
+
+        } catch (SQLException b) {
+            b.printStackTrace();
+        }
+        ArrayList<Team> teamsDB = new ArrayList<>();
+        closeConnection();
+        return teamsDB;
+
     }
 
     @Override
