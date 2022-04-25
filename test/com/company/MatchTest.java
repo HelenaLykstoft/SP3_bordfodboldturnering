@@ -18,8 +18,8 @@ class MatchTest {
     void setUp() {
         players.add("Jamie");
         players.add("Helena");
-        team1 = new Team("Poggers",players,0,0);
-        team2 = new Team("Kappa", players,0,0);
+       // team1 = new Team("Poggers",players,0,0, 0);
+        //team2 = new Team("Kappa", players,0,0,0);
         //match = new Match(10,11,team1,team2);
 
     }
