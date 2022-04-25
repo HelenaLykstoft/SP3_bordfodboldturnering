@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class Team {
     private String teamName;
-    ArrayList<String> teamPlayers;
+    ArrayList<Player> teamPlayers;
     int teamScore;
     int teamPosition;
     int goalPoints;
     int seed;
 
-    public Team (String teamName, ArrayList<String> teamPlayers, int teamScore, int teamPosition, int goalPoints, int seed){
+    public Team (String teamName, ArrayList<Player> teamPlayers, int teamScore, int teamPosition, int goalPoints, int seed){
         this.teamName = teamName;
         this.teamPlayers = teamPlayers;
         this.teamScore = teamScore;
@@ -27,7 +27,7 @@ public class Team {
     public String getTeamName(){
         return this.teamName;
     }
-    public ArrayList<String> getTeamPlayers(){
+    public ArrayList<Player> getTeamPlayers(){
         return this.teamPlayers;
     }
 
