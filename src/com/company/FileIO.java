@@ -31,12 +31,13 @@ public class FileIO implements IO{
             String[] currentTeamData = teamData.get(i).split(", ");
             int currentTeamSize = Integer.parseInt(currentTeamData[1]);
 
-            ArrayList<String> currentPlayers = new ArrayList<>();
+            ArrayList<Player> currentPlayers = new ArrayList<>();
 
 
             for(int j = 2; j < currentTeamSize+2; j++)
             {
-                currentPlayers.add(currentTeamData[j]);
+                Player tempPlayer = new Player(currentTeamData[j]);
+                currentPlayers.add(tempPlayer);
             }
             Team tmpTeam = new Team(currentTeamData[0],currentPlayers,Integer.parseInt(currentTeamData[currentTeamSize+2]),Integer.parseInt(currentTeamData[currentTeamSize+3]),Integer.parseInt(currentTeamData[currentTeamSize+4]),Integer.parseInt(currentTeamData[currentTeamSize+5]));
             currentTeams.add(tmpTeam);

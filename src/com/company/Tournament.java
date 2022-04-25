@@ -52,7 +52,10 @@ private float matchTime;
                 case 2:
                     ArrayList<String> data = new ArrayList<>();
                     data = textUI.registerTeam();
-                    Team newTeam = createTeam(data);
+                    String tempTeamName = data.get(0);
+                    data.remove(0);
+                    ArrayList<Player> tempPlayers = stringToPlayer(data);
+                    Team newTeam = createTeam(tempTeamName,tempPlayers);
                     teams.add(newTeam);
                     System.out.println(teams);
                     fileIO.writeTeamData(teams);
@@ -144,9 +147,7 @@ private float matchTime;
 
     }*/
 
-    private Team createTeam(ArrayList<String> teamPlayers){
-        String teamName = teamPlayers.get(0);
-        teamPlayers.remove(0);
+    private Team createTeam(String teamName,ArrayList<Player> teamPlayers){
         Team team = new Team(teamName,teamPlayers,0,0,0,teams.size());
         return team;
     }
@@ -192,5 +193,15 @@ private float matchTime;
     public void readDB(){
         DatabaseIO databaseIO = new DatabaseIO();
         databaseIO.readTeamData();
+    }
+
+    public ArrayList<Player> stringToPlayer(ArrayList<String> stringArrayList){
+        ArrayList<Player> players = new ArrayList<>();
+        for(int i = 0; i < stringArrayList.size(); i++)
+        {
+            Player tempPlayer = new Player(stringArrayList.get(i));
+            players.add(tempPlayer);
+        }
+        return players;
     }
 }
