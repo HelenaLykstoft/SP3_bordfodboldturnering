@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Tournament {
@@ -10,11 +11,13 @@ ArrayList<Team> teams;
 ArrayList<Match> matches;
 String time;
 Result result = new Result();
+private float matchTime;
 
     public Tournament(){
         teams = new ArrayList<>();
         matches = new ArrayList<>();
         teams = fileIO.readTeamData();
+        matches = fileIO.readMatchData(teams);
     }
 
 
@@ -22,19 +25,28 @@ Result result = new Result();
         textUI.writeToUser("Hello! Welcome! This is the startmenu.");
         int i= Integer.MAX_VALUE;
         String[] split;
-        while (i != 0) {
-            i = Integer.parseInt(textUI.getUserInput("Here u will see the menu: " +
-                    "\nPress 1 to register tournament time. " +
-                    "\nPress 2 to register team. " +
-                    "\nPress 3 to register the lineup for the first 4 games. " +
-                    "\nPress 4 to register the semifinals. " +
-                    "\nPress 5 to register the final match. " +
-                    "\nPress 6 to register wins."));
+        while (i != -1) {
+            i = Integer.parseInt(textUI.getUserInput("Press 0 to open menu: "));
             switch (i) {
+                case 0:
+                    textUI.writeToUser("Here u will see the menu: " +
+                            "\nPress 1 to register tournament time. " +
+                            "\nPress 2 to register team. " +
+                            "\nPress 3 to register the lineup for the first 4 games. " +
+                            "\nPress 4 to register the semifinals. " +
+                            "\nPress 5 to register the final match. " +
+                            "\nPress 6 to register wins." +
+                            "\nPress 7 to show team data."+
+                            "\nPress 8 to show the positioning of the teams."+
+                            "\nPress 9 to show the current matches registered in the tournament.");
+                    break;
                 case 1:
-                    String start = textUI.getUserInput("When does the tournament start?");
-                    String end = textUI.getUserInput("When does the tournament end?");
-                    setTime(start + " - " + end);
+                    textUI.writeToUser("All arguments should be typed as decimal numbers for example 8 am = 8.00. 30 min = 0.50, 1 hour = 1.00");
+                    float start = Float.parseFloat(textUI.getUserInput("When does the tournament start?"));
+                    matchTime = Float.parseFloat(textUI.getUserInput("How long should a match last?"));
+                    float pauseTime = Float.parseFloat(textUI.getUserInput("How long should the breaks in between matches be? "));
+                    setTime(String.valueOf(start+((matchTime+pauseTime)*7)));
+
                     System.out.println(time);
                     break;
                 case 2:
@@ -44,22 +56,28 @@ Result result = new Result();
                     teams.add(newTeam);
                     System.out.println(teams);
                     fileIO.writeTeamData(teams);
+
                     break;
                 case 3:
                     for (int j =1;j<5;j++) {
-                        split = textUI.getUserInput("(write teamnames with one space between)" +
-                                "\nMatch number " + j + " is played by: ").split(" ");
+
+                        String team1 = textUI.getUserInput("This is match number "+ j+ ".\nInsert the teamname of the first team");
                         Match matchTemp = new Match();
                         matchTemp.setMatchNumber(j);
-                        matchTemp.setTeam1(searchTeam(split[0]));
-                        matchTemp.setTeam2(searchTeam(split[1]));
+                        matchTemp.setTeam1(searchTeam(team1));
+                        String team2 = textUI.getUserInput("Insert the teamname of the second team");
+                        matchTemp.setTeam2(searchTeam(team2));
+                        float tmpStartTime = Float.parseFloat(textUI.getUserInput("All arguments should be typed as decimal numbers for example 8 am = 8.00. 30 min = 0.50, 1 hour = 1.00\n" +
+                                "Write the start time of this match"));
+                        matchTemp.setTime(tmpStartTime,tmpStartTime+matchTime);
                         matches.add(matchTemp);
                         System.out.println(matches);
                     }
+                    fileIO.writeMatchData(matches);
                     break;
                 case 4:
                     for (int j =5;j<7;j++) {
-                        split = textUI.getUserInput("Which teams should play semifinals against eachother?" +
+                        split = textUI.getUserInput("What teams should play the semifinals against each other?" +
                                 "\nMatch number " + j + " is played by: ").split(" ");
                         Match matchTemp = new Match();
                         matchTemp.setMatchNumber(j);
@@ -70,7 +88,7 @@ Result result = new Result();
                     }
                     break;
                 case 5:
-                    split = textUI.getUserInput("Which two teams should play in the final together?").split(" ");
+                    split = textUI.getUserInput("What two teams should play  the finals against each other?").split(" ");
                     Match matchTemp = new Match();
                     matchTemp.setMatchNumber(7); // 7 because it is the final match
                     matchTemp.setTeam1(searchTeam(split[0]));
@@ -83,6 +101,20 @@ Result result = new Result();
                             "\nWhich match do you want to add result to? "));
                     result.addResultToTeam(matches.get(k-1),textUI);
                     System.out.println(matches.get(k-1).getTeam1().teamScore + " " + matches.get(k-1).getTeam2().teamScore);
+                    split = textUI.getUserInput("What was the goal points of both teams? Write it as (team 1) - (team 2)").split(" - ");
+                    result.addGoalPointsToTeam(matches.get(k-1),textUI,Integer.parseInt(split[0]),Integer.parseInt(split[1]));
+                    break;
+                case 7:
+                    textUI.writeToUser("These are the current teams in the tournament: " + teams);
+                    break;
+                case 8:
+                    textUI.writeToUser("These are the teams current positions in the tournament: ");
+                    result.checkTeamsPositions(teams);
+                    System.out.println(teams);
+                    break;
+                case 9:
+                    textUI.writeToUser("These are the current matches registered:\n" + matches);
+                    break;
             }
         }
     }
@@ -111,7 +143,7 @@ Result result = new Result();
     private Team createTeam(ArrayList<String> teamPlayers){
         String teamName = teamPlayers.get(0);
         teamPlayers.remove(0);
-        Team team = new Team(teamName,teamPlayers,0,0);
+        Team team = new Team(teamName,teamPlayers,0,0,0,teams.size());
         return team;
     }
 
@@ -132,7 +164,7 @@ Result result = new Result();
                 return teams.get(i);
             }
         }
-        return null;
+        return searchTeam(textUI.getUserInput("The team was spelled wrong or doesn´t exist\nTry again!"));
     }
 
     public void startMatch()

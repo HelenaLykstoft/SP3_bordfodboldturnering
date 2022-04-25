@@ -1,8 +1,8 @@
 package com.company;
 
 public class Match {
-    private int startTime;
-    private int endTime;
+    private float startTime;
+    private float endTime;
     private Team team1;
     private Team team2;
     private int matchNumber;
@@ -11,7 +11,7 @@ public class Match {
         return  "The match takes place at this: " + startTime + "-" + endTime;
     }
 
-    public Team getWinningTeam(TextUI textUI){
+    public Team getWinningTeam(TextUI textUI){ // register the winning team
         String str = textUI.getUserInput("What team won the match press 1 for team 1 and 2 for team 2.");
         if (!str.equals("1") && !str.equals("2")) {
             textUI.writeToUser("you can only write 1 or 2.");
@@ -45,13 +45,22 @@ public class Match {
     public void setTeam2(Team team2) {
         this.team2 = team2;
     }
-    public void setTime(int startTime, int endTime){
+    public void setTime(float startTime, float endTime){
         this.startTime = startTime;
         this.endTime = endTime;
     }
+
+    public float getEndTime() {
+        return endTime;
+    }
+
+    public float getStartTime() {
+        return startTime;
+    }
+
     @Override
     public String toString(){
-        return team1.toString()+team2.toString();
+        return "team1: " + team1+ " team2: "  + team2 + " match start time: " + startTime + " match end time: " + endTime;
     }
 
 }

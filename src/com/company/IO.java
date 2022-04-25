@@ -5,5 +5,5 @@ import java.util.ArrayList;
 public interface IO {
     void saveData(Team team);
     ArrayList<String> readTeamData();
-    ArrayList<String> writeTeamData();
+    void writeTeamData();
 }
