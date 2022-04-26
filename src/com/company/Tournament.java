@@ -119,9 +119,9 @@ private float matchTime;
                     textUI.writeToUser("These are the current matches registered:\n" + matches);
                     break;
                 case 10:
-                    //writeDB();
+                    writeDB();
                     //readDB();
-                    System.out.println(teams.get(0).teamPlayers);
+
                     break;
             }
         }
