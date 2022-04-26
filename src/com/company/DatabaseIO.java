@@ -75,7 +75,9 @@ public class DatabaseIO implements IO {
 
             while (query2Result.next()) {
                 System.out.println(query2Result.getString(2));
-                //Team tmpteam = new Team("asda",);
+                ArrayList<Player> tempPlayers = selectPlayerNames(selectIDfromTeam(query2Result.getString(2)));
+                Team tmpTeam = new Team(query2Result.getString(2),tempPlayers,query2Result.getInt(3),query2Result.getInt(4),query2Result.getInt(5),query2Result.getInt(1));
+                teamsDB.add(tmpTeam);
             }
 
         } catch (SQLException b) {
@@ -85,6 +87,30 @@ public class DatabaseIO implements IO {
         closeConnection();
         return teamsDB;
 
+    }
+    public ArrayList<Player> selectPlayerNames(int teamID)
+    {
+        ArrayList<Player> players = new ArrayList<>();
+        Player tmpPlayer;
+        String selectName = "SELECT playerID FROM teamplayer WHERE teamID = '" + teamID + "'";
+        try {
+            PreparedStatement query2 = connection.prepareStatement(selectName);
+            var query2Result = query2.executeQuery();
+            while(query2Result.next()) {
+                selectName = "SELECT playerName FROM player WHERE ID = '" + query2Result.getInt(1)+"'";
+                PreparedStatement query2ButTotallyNOTQuery2 = connection.prepareStatement(selectName);
+                var query2ButTotallyNOTQuery2RESULTButNOTReallyResultFromQuery2 = query2ButTotallyNOTQuery2.executeQuery();
+                if(query2ButTotallyNOTQuery2RESULTButNOTReallyResultFromQuery2.next())
+                {
+                    tmpPlayer = new Player(query2ButTotallyNOTQuery2RESULTButNOTReallyResultFromQuery2.getString(1));
+                    players.add(tmpPlayer);
+                }
+            }
+
+        } catch (SQLException b) {
+            b.printStackTrace();
+        }
+        return players;
     }
 
     @Override

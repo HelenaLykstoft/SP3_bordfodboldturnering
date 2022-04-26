@@ -119,8 +119,8 @@ private float matchTime;
                     textUI.writeToUser("These are the current matches registered:\n" + matches);
                     break;
                 case 10:
-                    writeDB();
-                    //readDB();
+                    //writeDB();
+                    readDB();
 
                     break;
             }
@@ -193,7 +193,7 @@ private float matchTime;
     }
     public void readDB(){
         DatabaseIO databaseIO = new DatabaseIO();
-        databaseIO.readTeamData();
+        teams = databaseIO.readTeamData();
     }
 
     public ArrayList<Player> stringToPlayer(ArrayList<String> stringArrayList){

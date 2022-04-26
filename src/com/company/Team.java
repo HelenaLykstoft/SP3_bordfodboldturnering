@@ -22,7 +22,7 @@ public class Team {
     @Override
     public String toString(){
 
-        return("\nTeams:"+ this.teamName+" "+"Score: "+ this.teamScore+" "+"Position in tournament: "+this.teamPosition+" "+"Goal points: "+this.goalPoints +"\n");
+        return("\nTeams:"+ this.teamName+" "+"Score: "+ this.teamScore+" "+"Position in tournament: "+this.teamPosition+" "+"Goal points: "+this.goalPoints +"\nPlayer on team "+ this.teamName +": "+ getTeamPlayersasString()+"\n");
     }
     public String getTeamName(){
         return this.teamName;
