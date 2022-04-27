@@ -25,6 +25,15 @@ public class TextUI {
         }
         return data;
     }
+
+    public Player registerPlayer(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Write the name of the player here: ");
+        Player player = new Player(scan.nextLine());
+        return player;
+    }
+
+
     public void displayMessage(String msg){
         System.out.println(msg);
     }
@@ -37,6 +46,14 @@ public class TextUI {
     // Creates a msg where we can write whatever we want to user
     public void writeToUser(String msg){
         System.out.println(msg);
+    }
+
+    public void availableTeams(ArrayList<Team> teams){
+        for(int i=0; i<teams.size(); i++){
+            if(teams.get(i).teamPlayers.size() <5){
+                System.out.println(teams.get(i).getTeamName());
+            }
+        }
     }
     /*public void showTeams(){
 
