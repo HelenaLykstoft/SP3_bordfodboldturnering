@@ -39,6 +39,10 @@ public class Team {
         return temp;
     }
 
+    public void addPlayerToTeam(Player player){
+        teamPlayers.add(player);
+    }
+
     public int getTeamScore(){
         return this.teamScore;
     }
