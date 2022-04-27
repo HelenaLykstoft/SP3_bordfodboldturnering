@@ -12,6 +12,7 @@ ArrayList<Match> matches;
 String time;
 Result result = new Result();
 private float matchTime;
+DatabaseIO databaseIO = new DatabaseIO();
 
     public Tournament(){
         teams = new ArrayList<>();
@@ -38,7 +39,12 @@ private float matchTime;
                             "\nPress 6 to register wins." +
                             "\nPress 7 to show team data."+
                             "\nPress 8 to show the positioning of the teams."+
-                            "\nPress 9 to show the current matches registered in the tournament.");
+                            "\nPress 9 to show the current matches registered in the tournament." +
+                            "\nPress 10 to update the database." +
+                            "\nPress 11 to read teamdata from the database."+
+                            "\nPress 12 to search for a team."+
+                            "\nPress 13 to search for a player."+
+                            "\nPress 14 to wipe the database. WATCH OUT THO!!!!");
                     break;
                 case 1:
                     textUI.writeToUser("All arguments should be typed as decimal numbers for example 8 am = 8.00. 30 min = 0.50, 1 hour = 1.00");
@@ -119,9 +125,30 @@ private float matchTime;
                     textUI.writeToUser("These are the current matches registered:\n" + matches);
                     break;
                 case 10:
-                    //writeDB();
+                    textUI.writeToUser("The database has been updated.\n");
+                    writeDB();
+                    break;
+                case 11:
+                    textUI.writeToUser("This is the current teams in the database:\n");
                     readDB();
-
+                    break;
+                case 12:
+                    String searchTeam = textUI.getUserInput("Search for a team here:\n");
+                    //databaseIO.searchForTeam(searchTeam);
+                    textUI.writeToUser("This is the teams you searched for:\n"+databaseIO.searchForTeam(searchTeam));
+                    break;
+                case 13:
+                    String searchPlayer = textUI.getUserInput("Search for a player here:\n");
+                    textUI.writeToUser("This is the players you searched for:\n"+databaseIO.searchForPlayer(searchPlayer));
+                    break;
+                case 14:
+                    String answer = textUI.getUserInput("DO YOU WANT TO WIPE YOUR DATABASE? Y / YES, N / NO");
+                    if (answer.equalsIgnoreCase("y")){
+                        databaseIO.truncateTablesInfo();
+                        textUI.writeToUser("Your tables has now been wiped.");
+                } else if (answer.equalsIgnoreCase("n")){
+                        textUI.writeToUser("U chose not to wipe. Good choice.");
+                    }
                     break;
             }
         }
@@ -188,11 +215,9 @@ private float matchTime;
 
     }
     public void writeDB(){
-        DatabaseIO databaseIO = new DatabaseIO();
         databaseIO.writeTeamData(teams);
     }
     public void readDB(){
-        DatabaseIO databaseIO = new DatabaseIO();
         teams = databaseIO.readTeamData();
     }
 

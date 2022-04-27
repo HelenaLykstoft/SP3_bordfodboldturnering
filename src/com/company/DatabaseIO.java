@@ -13,9 +13,9 @@ public class DatabaseIO implements IO {
 
         String JdbcUrl = "jdbc:mysql://127.0.0.1:3306/sp3+?" + "autoReconnect=true&useSSL=false";
         String username = "root";
-       // String password = "Lampen04aug"; // Helenas Password
+        String password = "Lampen04aug"; // Helenas Password
         //String password = "Mysql1238Code18"; // Jamies Password
-        String password = "Solskin#12";
+        //String password = "Solskin#12";
 
         try {
             connection = DriverManager.getConnection(JdbcUrl, username, password);
@@ -232,4 +232,66 @@ public class DatabaseIO implements IO {
         return playerID;
     }
 
+    public ArrayList<String> searchForTeam(String teamName){
+        createConnection();
+        ArrayList<String> teamNamesLike = new ArrayList<>();
+        String searchTeamName = "SELECT name FROM team WHERE name LIKE '%" + teamName + "%'";
+        try {
+            PreparedStatement query8 = connection.prepareStatement(searchTeamName);
+            var query2Result = query8.executeQuery();
+            while(query2Result.next()) {
+                teamNamesLike.add(query2Result.getString(1));
+
+            }
+        } catch (SQLException q) {
+            q.printStackTrace();
+        }
+        closeConnection();
+        return teamNamesLike;
+    }
+
+    public ArrayList<String> searchForPlayer(String teamPlayers){
+        createConnection();
+        ArrayList<String> teamPlayersLike = new ArrayList<>();
+        String searchPlayerName = "SELECT playerName FROM player WHERE playerName LIKE '%" + teamPlayers + "%'";
+        try {
+            PreparedStatement query9 = connection.prepareStatement(searchPlayerName);
+            var query2Result = query9.executeQuery();
+            while(query2Result.next()) {
+                teamPlayersLike.add(query2Result.getString(1));
+
+            }
+        } catch (SQLException q) {
+            q.printStackTrace();
+        }
+        closeConnection();
+        return teamPlayersLike;
+    }
+
+
+    public void truncateTablesInfo(){
+        createConnection();
+        String truncateTables = "SELECT * FROM team;";
+        try {
+        PreparedStatement query112 = connection.prepareStatement(truncateTables);
+        query112.executeQuery();
+            truncateTables = "TRUNCATE TABLE team;";
+            PreparedStatement query113 = connection.prepareStatement(truncateTables);
+            query113.executeUpdate();
+            truncateTables = "SELECT * FROM player;";
+            PreparedStatement query114 = connection.prepareStatement(truncateTables);
+            query114.executeQuery();
+            truncateTables = "TRUNCATE TABLE player;";
+            PreparedStatement query115 = connection.prepareStatement(truncateTables);
+            query115.executeUpdate();
+            truncateTables = "SELECT * FROM teamplayer;";
+            PreparedStatement query116 = connection.prepareStatement(truncateTables);
+            query116.executeQuery();
+            truncateTables = "TRUNCATE TABLE teamplayer;";
+            PreparedStatement query117 = connection.prepareStatement(truncateTables);
+            query117.executeUpdate();
+        } catch (SQLException w) {
+            w.printStackTrace();
+        }
+    }
 }
