@@ -1,6 +1,5 @@
 package com.company;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class Tournament {
@@ -13,12 +12,14 @@ String time;
 Result result = new Result();
 private float matchTime;
 DatabaseIO databaseIO = new DatabaseIO();
+ArrayList<Player> unregisteredPlayers;
 
     public Tournament(){
         teams = new ArrayList<>();
         matches = new ArrayList<>();
-        teams = fileIO.readTeamData();
+        teams = databaseIO.readTeamData();
         matches = fileIO.readMatchData(teams);
+        unregisteredPlayers = databaseIO.selectUnregistered();
     }
 
 
@@ -33,18 +34,20 @@ DatabaseIO databaseIO = new DatabaseIO();
                     textUI.writeToUser("Here u will see the menu: " +
                             "\nPress 1 to register tournament time. " +
                             "\nPress 2 to register team. " +
-                            "\nPress 3 to register the lineup for the first 4 games. " +
-                            "\nPress 4 to register the semifinals. " +
-                            "\nPress 5 to register the final match. " +
-                            "\nPress 6 to register wins." +
-                            "\nPress 7 to show team data."+
-                            "\nPress 8 to show the positioning of the teams."+
-                            "\nPress 9 to show the current matches registered in the tournament." +
-                            "\nPress 10 to update the database." +
-                            "\nPress 11 to read teamdata from the database."+
-                            "\nPress 12 to search for a team."+
-                            "\nPress 13 to search for a player."+
-                            "\nPress 14 to wipe the database. WATCH OUT THO!!!!");
+                            "\nPress 3 to register player. " +
+                            "\nPress 4 to register the lineup for the first 4 games. " +
+                            "\nPress 5 to register the semifinals. " +
+                            "\nPress 6 to register the final match. " +
+                            "\nPress 7 to register wins." +
+                            "\nPress 8 to show team data."+
+                            "\nPress 9 to show the positioning of the teams."+
+                            "\nPress 10 to show the current matches registered in the tournament." +
+                            "\nPress 11 to update the database." +
+                            "\nPress 12 to read teamdata from the database."+
+                            "\nPress 13 to search for a team."+
+                            "\nPress 14 to search for a player."+
+                            "\nPress 15 to wipe the database. WATCH OUT THO!!!!" +
+                            "\nPress 16 to add unregistered players to a team.");
                     break;
                 case 1:
                     textUI.writeToUser("All arguments should be typed as decimal numbers for example 8 am = 8.00. 30 min = 0.50, 1 hour = 1.00");
@@ -68,6 +71,12 @@ DatabaseIO databaseIO = new DatabaseIO();
 
                     break;
                 case 3:
+                    Player tmpplayer = textUI.registerPlayer();
+                    unregisteredPlayers.add(tmpplayer);
+                    showUnregisteredPlayers();
+                    databaseIO.addPlayer(tmpplayer);
+                    break;
+                case 4:
                     for (int j =1;j<5;j++) {
 
                         String team1 = textUI.getUserInput("This is match number "+ j+ ".\nInsert the teamname of the first team");
@@ -84,7 +93,7 @@ DatabaseIO databaseIO = new DatabaseIO();
                     }
                     fileIO.writeMatchData(matches);
                     break;
-                case 4:
+                case 5:
                     for (int j =5;j<7;j++) {
                         split = textUI.getUserInput("What teams should play the semifinals against each other?" +
                                 "\nMatch number " + j + " is played by: ").split(" ");
@@ -96,7 +105,7 @@ DatabaseIO databaseIO = new DatabaseIO();
                         System.out.println(matches);
                     }
                     break;
-                case 5:
+                case 6:
                     split = textUI.getUserInput("What two teams should play  the finals against each other?").split(" ");
                     Match matchTemp = new Match();
                     matchTemp.setMatchNumber(7); // 7 because it is the final match
@@ -105,7 +114,7 @@ DatabaseIO databaseIO = new DatabaseIO();
                     matches.add(matchTemp);
                     System.out.println(matches);
                     break;
-                case 6:
+                case 7:
                     int k = Integer.parseInt(textUI.getUserInput("1,2,3,4 ( first matches ) 5,6 ( semifinals ), 7 (final match)" +
                             "\nWhich match do you want to add result to? "));
                     result.addResultToTeam(matches.get(k-1),textUI);
@@ -113,35 +122,35 @@ DatabaseIO databaseIO = new DatabaseIO();
                     split = textUI.getUserInput("What was the goal points of both teams? Write it as (team 1) - (team 2)").split(" - ");
                     result.addGoalPointsToTeam(matches.get(k-1),textUI,Integer.parseInt(split[0]),Integer.parseInt(split[1]));
                     break;
-                case 7:
+                case 8:
                     textUI.writeToUser("These are the current teams in the tournament: " + teams);
                     break;
-                case 8:
+                case 9:
                     textUI.writeToUser("These are the teams current positions in the tournament: ");
                     result.checkTeamsPositions(teams);
                     System.out.println(teams);
                     break;
-                case 9:
+                case 10:
                     textUI.writeToUser("These are the current matches registered:\n" + matches);
                     break;
-                case 10:
+                case 11:
                     textUI.writeToUser("The database has been updated.\n");
                     writeDB();
                     break;
-                case 11:
+                case 12:
                     textUI.writeToUser("This is the current teams in the database:\n");
                     readDB();
                     break;
-                case 12:
+                case 13:
                     String searchTeam = textUI.getUserInput("Search for a team here:\n");
                     //databaseIO.searchForTeam(searchTeam);
                     textUI.writeToUser("This is the teams you searched for:\n"+databaseIO.searchForTeam(searchTeam));
                     break;
-                case 13:
+                case 14:
                     String searchPlayer = textUI.getUserInput("Search for a player here:\n");
                     textUI.writeToUser("This is the players you searched for:\n"+databaseIO.searchForPlayer(searchPlayer));
                     break;
-                case 14:
+                case 15:
                     String answer = textUI.getUserInput("DO YOU WANT TO WIPE YOUR DATABASE? Y / YES, N / NO");
                     if (answer.equalsIgnoreCase("y")){
                         databaseIO.truncateTablesInfo();
@@ -150,8 +159,18 @@ DatabaseIO databaseIO = new DatabaseIO();
                         textUI.writeToUser("U chose not to wipe. Good choice.");
                     }
                     break;
+                case 16:
+                    textUI.writeToUser("Here are a list of unregistered players:" + unregisteredPlayers);
+                    int playerNumber =Integer.parseInt(textUI.getUserInput("Who do u want to add to a team? 0 is the first player and so on."));
+                    textUI.writeToUser("Here is a list of available teams:");
+                    textUI.availableTeams(teams);
+                    String teamName = textUI.getUserInput("Which team do u want to add the player to?");
+                    addAPlayerToTeam(unregisteredPlayers.get(playerNumber),teamName,playerNumber);
+                    break;
             }
         }
+        writeDB();
+        textUI.writeToUser("The data has been saved. Have a nice day :D uwu");
     }
 
     /*public Tournament(FileIO fileIO, TextUI textUI, ArrayList<Team> teams, Team team) {
@@ -200,6 +219,12 @@ DatabaseIO databaseIO = new DatabaseIO();
         return searchTeam(textUI.getUserInput("The team was spelled wrong or doesn´t exist\nTry again!"));
     }
 
+    public void showUnregisteredPlayers(){
+        textUI.writeToUser("Here are all the unregistered players: \n" + unregisteredPlayers);
+        // Tildel spiller til et hold
+    }
+
+
     public void startMatch()
     {
 
@@ -215,6 +240,7 @@ DatabaseIO databaseIO = new DatabaseIO();
 
     }
     public void writeDB(){
+        databaseIO.truncateTablesInfo();
         databaseIO.writeTeamData(teams);
     }
     public void readDB(){
@@ -229,5 +255,16 @@ DatabaseIO databaseIO = new DatabaseIO();
             players.add(tempPlayer);
         }
         return players;
+    }
+
+    public void addAPlayerToTeam(Player player,String teamName,int playerNumber){
+        int correctTeamNumber = Integer.MAX_VALUE;
+        for (int i = 0;i<teams.size();i++){
+            if(teams.get(i).getTeamName().equals(teamName)){
+                correctTeamNumber=i;
+            }
+        }
+        teams.get(correctTeamNumber).addPlayerToTeam(player);
+        unregisteredPlayers.remove(playerNumber);
     }
 }
