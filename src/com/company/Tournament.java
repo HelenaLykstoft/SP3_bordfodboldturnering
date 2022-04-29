@@ -173,27 +173,6 @@ ArrayList<Player> unregisteredPlayers;
         textUI.writeToUser("The data has been saved. Have a nice day :D uwu");
     }
 
-    /*public Tournament(FileIO fileIO, TextUI textUI, ArrayList<Team> teams, Team team) {
-        this.fileIO = fileIO;
-        this.textUI = textUI;
-        this.teams = teams;
-
-        ArrayList<String> teamPlayers = new ArrayList<>();
-        teamPlayers =  fileIO.readTeamData(); // every index contains the following: teamName, playerNames, score, position
-
-
-        if(teamPlayers == null)
-        {
-            System.out.println("error -- please insert team data");
-            //an error message that displays in case of faulty data input.
-
-            //fetching data from the TEAM class, aka. Asking user for data input.
-            teamPlayers = team.getTeamPlayers(); //User will input the names of the individual players.
-        }
-        this.createTeam(teamPlayers);
-
-    }*/
-
     private Team createTeam(String teamName,ArrayList<Player> teamPlayers){
         Team team = new Team(teamName,teamPlayers,0,0,0,teams.size());
         return team;
@@ -224,21 +203,6 @@ ArrayList<Player> unregisteredPlayers;
         // Tildel spiller til et hold
     }
 
-
-    public void startMatch()
-    {
-
-
-    }
-    public void endMatch(){
-
-    }
-    public void currentMatch(){
-
-    }
-    public void getMatchHistory(){
-
-    }
     public void writeDB(){
         databaseIO.truncateTablesInfo();
         databaseIO.writeTeamData(teams);
