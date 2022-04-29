@@ -6,13 +6,13 @@ public class Tournament {
 
 private FileIO fileIO = new FileIO();
 private com.company.TextUI textUI = new com.company.TextUI();
-ArrayList<Team> teams;
-ArrayList<Match> matches;
-String time;
-Result result = new Result();
+private ArrayList<Team> teams;
+private ArrayList<Match> matches;
+private String time;
+private Result result = new Result();
 private float matchTime;
-DatabaseIO databaseIO = new DatabaseIO();
-ArrayList<Player> unregisteredPlayers;
+private DatabaseIO databaseIO = new DatabaseIO();
+private ArrayList<Player> unregisteredPlayers;
 
     public Tournament(){
         teams = new ArrayList<>();
@@ -119,7 +119,7 @@ ArrayList<Player> unregisteredPlayers;
                     int k = Integer.parseInt(textUI.getUserInput("1,2,3,4 ( first matches ) 5,6 ( semifinals ), 7 (final match)" +
                             "\nWhich match do you want to add result to? "));
                     result.addResultToTeam(matches.get(k-1),textUI);
-                    System.out.println(matches.get(k-1).getTeam1().teamScore + " " + matches.get(k-1).getTeam2().teamScore);
+                    System.out.println(matches.get(k-1).getTeam1().getTeamScore() + " " + matches.get(k-1).getTeam2().getTeamScore());
                     split = textUI.getUserInput("What was the goal points of both teams? Write it as (team 1) - (team 2)").split(" - ");
                     result.addGoalPointsToTeam(matches.get(k-1),textUI,Integer.parseInt(split[0]),Integer.parseInt(split[1]));
                     break;

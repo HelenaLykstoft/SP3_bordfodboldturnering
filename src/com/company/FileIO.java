@@ -49,7 +49,7 @@ public class FileIO implements IO{
     public void writeTeamData(ArrayList<Team> teams,ArrayList<Player> unregiPlayers) {
         String teamData = "teamName, teamSize, playerNames, score, position, goalPoints, seed\n";
         for (int i=0;i<teams.size();i++) {
-            teamData+= "" + teams.get(i).getTeamName() + ", " + teams.get(i).teamPlayers.size() + ", " + teams.get(i).getTeamPlayersasString() + teams.get(i).getTeamScore() +", "+ teams.get(i).getTeamPosition() +", "+ teams.get(i).getGoalPoints() + ", " + teams.get(i).getSeed()+"\n";
+            teamData+= "" + teams.get(i).getTeamName() + ", " + teams.get(i).getTeamPlayers().size() + ", " + teams.get(i).getTeamPlayersasString() + teams.get(i).getTeamScore() +", "+ teams.get(i).getTeamPosition() +", "+ teams.get(i).getGoalPoints() + ", " + teams.get(i).getSeed()+"\n";
         }
         try {
             FileWriter output = new FileWriter("src/com/company/teamData.txt");

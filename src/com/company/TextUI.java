@@ -50,7 +50,7 @@ public class TextUI {
 
     public void availableTeams(ArrayList<Team> teams){
         for(int i=0; i<teams.size(); i++){
-            if(teams.get(i).teamPlayers.size() <5){
+            if(teams.get(i).getTeamPlayers().size() <5){
                 System.out.println(teams.get(i).getTeamName());
             }
         }

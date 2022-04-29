@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Team {
     private String teamName;
-    ArrayList<Player> teamPlayers;
-    int teamScore;
-    int teamPosition;
-    int goalPoints;
-    int seed;
+    private ArrayList<Player> teamPlayers;
+    private int teamScore;
+    private int teamPosition;
+    private int goalPoints;
+    private int seed;
 
     public Team (String teamName, ArrayList<Player> teamPlayers, int teamScore, int teamPosition, int goalPoints, int seed){
         this.teamName = teamName;
