@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DatabaseIO implements IO {
-    Connection connection = null;
+    private Connection connection = null;
 
     public void createConnection() {
 
         String JdbcUrl = "jdbc:mysql://127.0.0.1:3306/sp3+?" + "autoReconnect=true&useSSL=false";
         String username = "root";
-        String password = "Lampen04aug"; // Helenas Password
-        //String password = "Mysql1238Code18"; // Jamies Password
+        //String password = "Lampen04aug"; // Helenas Password
+        String password = "Mysql1238Code18"; // Jamies Password
         //String password = "Solskin#12";
 
         try {
