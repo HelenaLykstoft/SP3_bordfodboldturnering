@@ -38,6 +38,9 @@ public class Team {
         }
         return temp;
     }
+    public void removePlayerFromTeam(int removeTeamPlayer){
+        teamPlayers.remove(removeTeamPlayer);
+    }
 
     public void addPlayerToTeam(Player player){
         teamPlayers.add(player);

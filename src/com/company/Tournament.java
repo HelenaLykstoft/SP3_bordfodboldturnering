@@ -47,7 +47,8 @@ ArrayList<Player> unregisteredPlayers;
                             "\nPress 13 to search for a team."+
                             "\nPress 14 to search for a player."+
                             "\nPress 15 to wipe the database. WATCH OUT THO!!!!" +
-                            "\nPress 16 to add unregistered players to a team.");
+                            "\nPress 16 to add unregistered players to a team." +
+                            "\nPress 17 to remove players.");
                     break;
                 case 1:
                     textUI.writeToUser("All arguments should be typed as decimal numbers for example 8 am = 8.00. 30 min = 0.50, 1 hour = 1.00");
@@ -67,7 +68,7 @@ ArrayList<Player> unregisteredPlayers;
                     Team newTeam = createTeam(tempTeamName,tempPlayers);
                     teams.add(newTeam);
                     System.out.println(teams);
-                    fileIO.writeTeamData(teams);
+                    fileIO.writeTeamData(teams,unregisteredPlayers);
 
                     break;
                 case 3:
@@ -166,33 +167,23 @@ ArrayList<Player> unregisteredPlayers;
                     textUI.availableTeams(teams);
                     String teamName = textUI.getUserInput("Which team do u want to add the player to?");
                     addAPlayerToTeam(unregisteredPlayers.get(playerNumber),teamName,playerNumber);
+                    textUI.writeToUser("Your member has now been registered to a team.");
+                    break;
+                case 17:
+                    textUI.writeToUser("Here are a list of all teams.");
+                    getTeams();
+                    String removeFromWhichTeam =textUI.getUserInput("Which team do u want to remove from? Write the name of the team.");
+                    int teamNumber = searchRemovableTeam(removeFromWhichTeam);
+                    int removePlayerNumber = Integer.parseInt(textUI.getUserInput("Which player do u wish to remove? 0 is the first player and so on." + teams.get(teamNumber).getTeamPlayers()));
+                    unregisteredPlayers.add(teams.get(teamNumber).getTeamPlayers().get(removePlayerNumber));
+                    teams.get(teamNumber).removePlayerFromTeam(removePlayerNumber);
+                    textUI.writeToUser("The member is now unregistered.");
                     break;
             }
         }
         writeDB();
         textUI.writeToUser("The data has been saved. Have a nice day :D uwu");
     }
-
-    /*public Tournament(FileIO fileIO, TextUI textUI, ArrayList<Team> teams, Team team) {
-        this.fileIO = fileIO;
-        this.textUI = textUI;
-        this.teams = teams;
-
-        ArrayList<String> teamPlayers = new ArrayList<>();
-        teamPlayers =  fileIO.readTeamData(); // every index contains the following: teamName, playerNames, score, position
-
-
-        if(teamPlayers == null)
-        {
-            System.out.println("error -- please insert team data");
-            //an error message that displays in case of faulty data input.
-
-            //fetching data from the TEAM class, aka. Asking user for data input.
-            teamPlayers = team.getTeamPlayers(); //User will input the names of the individual players.
-        }
-        this.createTeam(teamPlayers);
-
-    }*/
 
     private Team createTeam(String teamName,ArrayList<Player> teamPlayers){
         Team team = new Team(teamName,teamPlayers,0,0,0,teams.size());
@@ -219,29 +210,23 @@ ArrayList<Player> unregisteredPlayers;
         return searchTeam(textUI.getUserInput("The team was spelled wrong or doesn´t exist\nTry again!"));
     }
 
+    public int searchRemovableTeam(String searchName){
+        for (int i=0; i<teams.size();i++){
+            if (teams.get(i).getTeamName().equals(searchName)){
+                return i;
+            }
+        }
+        return searchRemovableTeam(textUI.getUserInput("The team was spelled wrong or doesn´t exist\nTry again!"));
+    }
+
     public void showUnregisteredPlayers(){
         textUI.writeToUser("Here are all the unregistered players: \n" + unregisteredPlayers);
         // Tildel spiller til et hold
     }
 
-
-    public void startMatch()
-    {
-
-
-    }
-    public void endMatch(){
-
-    }
-    public void currentMatch(){
-
-    }
-    public void getMatchHistory(){
-
-    }
     public void writeDB(){
         databaseIO.truncateTablesInfo();
-        databaseIO.writeTeamData(teams);
+        databaseIO.writeTeamData(teams,unregisteredPlayers);
     }
     public void readDB(){
         teams = databaseIO.readTeamData();
@@ -267,4 +252,11 @@ ArrayList<Player> unregisteredPlayers;
         teams.get(correctTeamNumber).addPlayerToTeam(player);
         unregisteredPlayers.remove(playerNumber);
     }
+
+    public void getTeams(){
+        for (int i = 0;i< teams.size();i++){
+            textUI.writeToUser(teams.get(i).getTeamName());
+        }
+    }
+
 }
