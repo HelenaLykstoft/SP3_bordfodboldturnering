@@ -55,19 +55,4 @@ public class TextUI {
             }
         }
     }
-    /*public void showTeams(){
-
-    }
-    public void showResults(){
-
-    }
-    public void getTeamPlacement(){
-
-    }
-    public void showAllMatches(){
-
-    }
-    public void showNextMatch(){
-
-    } Skal de bruges eller ej her? et andet sted? aldrig?*/
 }
