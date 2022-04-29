@@ -110,7 +110,7 @@ public class DatabaseIO implements IO {
     }
 
     @Override
-    public void writeTeamData(ArrayList<Team> teams) {
+    public void writeTeamData(ArrayList<Team> teams,ArrayList<Player> unregiPlayer) {
         createConnection();
         String teamData;
         try {
@@ -126,6 +126,7 @@ public class DatabaseIO implements IO {
                 //System.out.println(query1Result);
 
             }
+            writeUnregiPlayerData(unregiPlayer);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -323,6 +324,23 @@ public class DatabaseIO implements IO {
         }
         closeConnection();
         return unregPlay;
+    }
+    public void writeUnregiPlayerData(ArrayList<Player> UnregiPlayers) {
+        // createConnection();
+        String playerData;
+        try {
+            PreparedStatement query4;
+            for (int i = 0; i < UnregiPlayers.size(); i++) {
+                playerData = "INSERT INTO player (playerName,hasTeam) VALUES ('" + UnregiPlayers.get(i).getName()+"','0')";
+                query4 = connection.prepareStatement(playerData);
+                var query1Result = query4.executeUpdate();
+                //System.out.println(query1Result);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // closeConnection();
     }
 
 }

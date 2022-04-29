@@ -6,7 +6,7 @@ public interface IO {
 
     ArrayList<Team> readTeamData();
 
-    void writeTeamData(ArrayList<Team> teams);
+    void writeTeamData(ArrayList<Team> teams,ArrayList<Player> unregiPlayer);
 
     void writeMatchData(ArrayList<Match> matches);
 
