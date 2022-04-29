@@ -24,7 +24,7 @@ private ArrayList<Player> unregisteredPlayers;
 
 
     public void tournamentMenu() {
-        textUI.writeToUser("Hello! Welcome! This is the startmenu.");
+        textUI.writeToUser("Hello! Welcome! This is the startmenu. OwO");
         int i= Integer.MAX_VALUE;
         String[] split;
         while (i != -1) {
@@ -182,7 +182,7 @@ private ArrayList<Player> unregisteredPlayers;
             }
         }
         writeDB();
-        textUI.writeToUser("The data has been saved. Have a nice day :D uwu");
+        textUI.writeToUser("The data has been saved. Have a nice day :D OwO");
     }
 
     private Team createTeam(String teamName,ArrayList<Player> teamPlayers){
